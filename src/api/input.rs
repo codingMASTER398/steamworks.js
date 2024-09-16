@@ -94,6 +94,12 @@ pub mod input {
         pub fn get_handle(&self) -> BigInt {
             self.handle.clone()
         }
+
+        #[napi]
+        pub fn show_binding_panel(&self) -> bool {
+            let client = crate::client::get_client();
+            client.input().show_binding_panel(self.handle.get_u64().1)
+        } 
     }
 
     #[napi(object)]
@@ -155,7 +161,7 @@ pub mod input {
         let client = crate::client::get_client();
         client
             .input()
-            .get_glyph_for_action_origin(unsafe { std::mem::transmute(action_origin) })
+            .get_glyph_for_action_origin(&action_origin)
     }
 
     #[napi]
@@ -163,12 +169,6 @@ pub mod input {
         let client = crate::client::get_client();
         client
             .input()
-            .get_string_for_action_origin(unsafe { std::mem::transmute(action_origin) })
+            .get_string_for_action_origin(&action_origin)
     }
-
-    #[napi]
-    pub fn show_binding_panel(controller_handle: BigInt) -> bool {
-        let client = crate::client::get_client();
-        client.input().show_binding_panel(controller_handle.get_u64().1)
-    } 
 }
