@@ -98,7 +98,7 @@ pub mod input {
         #[napi]
         pub fn show_binding_panel(&self) -> bool {
             let client = crate::client::get_client();
-            client.input().show_binding_panel(&self.handle.get_u64().1)
+            client.input().show_binding_panel(self.handle.get_u64().1)
         } 
     }
 
@@ -157,18 +157,18 @@ pub mod input {
     }
 
     #[napi]
-    pub fn get_glyph_for_action_origin(action_origin: BigInt) -> String {
+    pub fn get_glyph_for_action_origin(action_origin: i32) -> String {
         let client = crate::client::get_client();
         client
             .input()
-            .get_glyph_for_action_origin(action_origin.get_u64().1)
+            .get_glyph_for_action_origin(action_origin as sys::EInputActionOrigin)
     }
 
     #[napi]
-    pub fn get_string_for_action_origin(action_origin: BigInt) -> String {
+    pub fn get_string_for_action_origin(action_origin: i32) -> String {
         let client = crate::client::get_client();
         client
             .input()
-            .get_string_for_action_origin(action_origin.get_u64().1)
+            .get_glyph_for_action_origin(action_origin as sys::EInputActionOrigin)
     }
 }
