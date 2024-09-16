@@ -155,21 +155,4 @@ pub mod input {
         let client = crate::client::get_client();
         client.input().run_frame();
     }
-
-
-    #[napi]
-    pub fn get_glyph_for_action_origin(action_origin: i32) -> String {
-        let client = crate::client::get_client();
-        client
-            .input()
-            .get_glyph_for_action_origin(action_origin)
-    }
-
-    #[napi]
-    pub fn get_string_for_action_origin(action_origin: i32) -> String {
-        let client = crate::client::get_client();
-        client
-            .input()
-            .get_string_for_action_origin(action_origin)
-    }
 }
