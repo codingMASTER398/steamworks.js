@@ -144,4 +144,31 @@ pub mod input {
         let client = crate::client::get_client();
         client.input().shutdown()
     }
+    #[napi]
+    pub fn run_frame() {
+        let client = crate::client::get_client();
+        client.input().run_frame();
+    }
+
+    #[napi]
+    pub fn get_glyph_for_action_origin(action_origin: i32) -> String {
+        let client = crate::client::get_client();
+        client
+            .input()
+            .get_glyph_for_action_origin(unsafe { std::mem::transmute(action_origin) })
+    }
+
+    #[napi]
+    pub fn get_string_for_action_origin(action_origin: i32) -> String {
+        let client = crate::client::get_client();
+        client
+            .input()
+            .get_string_for_action_origin(unsafe { std::mem::transmute(action_origin) })
+    }
+
+    #[napi]
+    pub fn show_binding_panel(controller_handle: BigInt) -> bool {
+        let client = crate::client::get_client();
+        client.input().show_binding_panel(controller_handle.get_u64().1)
+    } 
 }
