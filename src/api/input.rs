@@ -156,16 +156,4 @@ pub mod input {
         let client = crate::client::get_client();
         client.input().run_frame();
     }
-
-    #[napi]
-    pub fn get_action_glyph_path(&self, action_name: String, input_handle: BigInt, action_set_handle: BigInt) -> Option<String> {
-        let client = crate::client::get_client();
-
-        // Extract the u64 values from BigInt for input_handle and action_set_handle
-        let input_handle = input_handle.get_u64().1;
-        let action_set_handle = action_set_handle.get_u64().1;
-
-        // Call the underlying Rust method to get the glyph path
-        client.input().get_action_glyph_path(input_handle, action_set_handle, &action_name)
-    }
 }
