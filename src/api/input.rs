@@ -199,7 +199,7 @@ pub mod input {
     #[napi]
     pub fn get_glyph_for_action_origin(origin: BigInt) -> String {
         let client = crate::client::get_client();
-        let origin_value = origin.get_u64().1 as EInputActionOrigin; // Convert BigInt to EInputActionOrigin
+        let origin_value = origin.get_u64().1 as steamworks_sys::EInputActionOrigin; // Convert BigInt to EInputActionOrigin
         client.input().get_glyph_for_action_origin(origin_value)
     }
 }
