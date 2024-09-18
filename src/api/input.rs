@@ -1,9 +1,9 @@
 use napi_derive::napi;
-use steamworks_sys::EInputActionOrigin;
 
 #[napi]
 pub mod input {
     use napi::bindgen_prelude::BigInt;
+    use steamworks_sys::EInputActionOrigin;
 
     #[napi(string_enum)]
     pub enum InputType {
