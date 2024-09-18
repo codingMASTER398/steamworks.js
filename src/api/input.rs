@@ -198,9 +198,9 @@ pub mod input {
 
     #[napi]
     pub fn get_glyph_for_action_origin(origin: BigInt) -> String {
+        let origin_value = origin.get_u64().1 as u32; // Convert BigInt to u32
+        let origin_enum = unsafe { std::mem::transmute::<u32, EInputActionOrigin>(origin_value) }; // Convert u32 to EInputActionOrigin
         let client = crate::client::get_client();
-        let origin_value = origin.get_u64().1 as u64; // Convert BigInt to u64
-        let origin_enum = unsafe { std::mem::transmute::<u64, EInputActionOrigin>(origin_value) }; // Convert u64 to EInputActionOrigin
         client.input().get_glyph_for_action_origin(origin_enum)
     }
 }
