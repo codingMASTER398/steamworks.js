@@ -199,7 +199,8 @@ pub mod input {
     #[napi]
     pub fn get_glyph_for_action_origin(origin: BigInt) -> String {
         let client = crate::client::get_client();
-        let origin_value = origin.get_u64().1 as steamworks_sys::EInputActionOrigin; // Convert BigInt to EInputActionOrigin
-        client.input().get_glyph_for_action_origin(origin_value)
+        let origin_value = origin.get_u64().1 as u64; // Convert BigInt to u64
+        let origin_enum = unsafe { std::mem::transmute::<u64, steamworks_sys::EInputActionOrigin>(origin_value) }; // Convert u64 to EInputActionOrigin
+        client.input().get_glyph_for_action_origin(origin_enum)
     }
 }
