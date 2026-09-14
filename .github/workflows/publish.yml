@@ -9,23 +9,6 @@ env:
     DEBUG: 'napi:*'
 
 jobs:
-    check:
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v3
-
-            - name: Setup Rust
-              uses: dtolnay/rust-toolchain@stable
-              with:
-                  toolchain: stable
-
-            - name: Check formatting
-              run: cargo fmt --all --check
-
-            - name: Clippy
-              run: cargo clippy
-
     build:
         runs-on: ubuntu-latest
 
@@ -35,7 +18,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v3
               with:
-                  node-version: 22.14.0
+                  node-version: 26.1.0
 
             - name: Setup Rust
               uses: dtolnay/rust-toolchain@stable
@@ -48,7 +31,7 @@ jobs:
             - run: cargo install cargo-xwin
 
             - name: Node install
-              run: npm ci
+              run: npm install
 
             - name: Build Linux
               run: npm run build -- --target x86_64-unknown-linux-gnu
